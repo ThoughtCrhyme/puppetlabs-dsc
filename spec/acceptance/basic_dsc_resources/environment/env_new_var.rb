@@ -1,5 +1,6 @@
 require 'erb'
 require 'dsc_utils'
+
 test_name 'MODULES-2501 - C68547 - Apply DSC Environment Resource for Non-existent Environment Variable'
 
 confine(:to, :platform => 'windows')
