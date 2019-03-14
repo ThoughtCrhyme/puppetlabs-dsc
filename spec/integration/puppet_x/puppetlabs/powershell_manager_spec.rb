@@ -32,7 +32,7 @@ module PuppetX
 end
 
 describe PuppetX::Dsc::PowerShellManager,
-  :if => Puppet::Util::Platform.windows? && PuppetX::Dsc::PowerShellManager.supported? do
+  PuppetX::Dsc::PowerShellManager.supported? do
 
   let (:manager_args) {
     powershell = Puppet::Type.type(:base_dsc).defaultprovider.command(:powershell)
@@ -45,6 +45,10 @@ describe PuppetX::Dsc::PowerShellManager,
   end
 
   let (:manager) { create_manager() }
+
+  before :each do
+    skip ('Not on Windows platform') unless Puppet::Util::Platform.windows?
+  end
 
   describe "when managing the powershell process" do
     describe "the PowerShellManager::instance method" do
@@ -435,7 +439,7 @@ try{
     end
 
    it "should be able to execute the code in a catch block when using try/catch" do
-     result = manager.execute(<<-CODE
+    result = manager.execute(<<-CODE
 try {
   throw "Error!"
   exit 0

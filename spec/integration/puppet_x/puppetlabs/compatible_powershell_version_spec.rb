@@ -3,8 +3,9 @@ require 'spec_helper'
 require 'puppet/type'
 require 'puppet_x/puppetlabs/compatible_powershell_version'
 
-describe PuppetX::PuppetLabs::Dsc::CompatiblePowerShellVersion, :if => Puppet::Util::Platform.windows? do
+describe PuppetX::PuppetLabs::Dsc::CompatiblePowerShellVersion do
   before(:each) do
+    skip ('Not on Windows platform') unless Puppet::Util::Platform.windows?
     @ps = PuppetX::PuppetLabs::Dsc::CompatiblePowerShellVersion
   end
 
